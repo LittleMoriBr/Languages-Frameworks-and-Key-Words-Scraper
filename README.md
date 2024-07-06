@@ -1,3 +1,6 @@
+# LinkedIn Languages, Frameworks and Key Words Scraper
+
+
 Objective:
 Develop a web scraping bot to analyze job postings on LinkedIn, specifically focusing on identifying the most frequently requested programming languages, frameworks, and the 50 most common relevant words.
 
