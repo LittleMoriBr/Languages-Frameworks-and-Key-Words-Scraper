@@ -40,7 +40,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 
 driver.maximize_window()
 # Navigate to the website
-url = 'https:/BaseUrl' #Set the base Url
+url = 'https:/www.BaseUrl' #Set the base Url
 driver.get(url)
 
 # Log into LinkedIn
