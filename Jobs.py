@@ -19,7 +19,7 @@ nltk.download('stopwords')
 
 # Predefined list of programming languages
 programming_languages = [
-    'Python', 'Java', 'C++', 'JavaScript', 'C#', 'PHP', 'Swift', 'Ruby', 
+    'Python', 'C++', 'JavaScript', 'C#', 'PHP', 'Swift', 'Ruby', 
     'TypeScript', 'Kotlin', 'Objective\-C', 'Perl', 'Rust', 'Dart',
     'SQL', 'MATLAB', 'VBA'
 ]
@@ -40,27 +40,23 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 
 driver.maximize_window()
 # Navigate to the website
-url = 'https:/www.BaseUrl' #Set the base Url
-driver.get(url)
+url = 'https://www.BaseUrl.com' #Set the base Url
+driver.get(f'{url}/login')
 
 # Log into LinkedIn
 username = driver.find_element(By.ID, "username")
 password = driver.find_element(By.ID, "password")
-username.send_keys("username") # Enter your email
-password.send_keys("password") # Enter your password
+username.send_keys("Email") # Enter your email
+password.send_keys("Password") # Enter your password
 driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 
 time.sleep(10)  # Wait for login to complete
-
-# Navigate to job search
-driver.get(f"{url}/jobs/")
-time.sleep(5)  # Wait for the page to load
 
 # Locate the job search box and enter your role
 Role = 'Your Role'
 
 # Locate the location search box and enter your location
-location = 'Yor Location'
+location = 'Your Location'
 
 driver.get(f"{url}/jobs/search/?keywords={Role}&location={location}")
 
@@ -75,7 +71,7 @@ def extract_languages_and_frameworks(description):
     found_languages = set()  # Use a set to avoid counting a language more than once per job
     found_frameworks = set()  # Use a set to avoid counting a framework more than once per job
 
-    for language in ['R', 'Go']: #Handling false positives for common words that are also programming languages 
+    for language in ['R', 'Go', 'Java']: #Handling false positives for common words that are also programming languages 
         if re.search(r'\b' + re.escape(language) + r'\b', description, re.IGNORECASE):
             found_languages.add(language)
             print(f"Found language: {language}")
@@ -137,7 +133,7 @@ def scroll_job_listings():
 all_processed_jobs = set()
 start = 0
 total_jobs_processed = 0
-max_jobs_to_process = 200  # Set the maximum number of jobs to process
+max_jobs_to_process = 10  # Set the maximum number of jobs to process
 
 while total_jobs_processed < max_jobs_to_process:
     # Scroll the job listings container to load all jobs
