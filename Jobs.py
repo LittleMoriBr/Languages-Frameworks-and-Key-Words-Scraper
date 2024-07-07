@@ -40,7 +40,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 
 driver.maximize_window()
 # Navigate to the website
-url = 'https://www.linkedin.com/login'
+url = 'https:/BaseUrl' #Set the base Url
 driver.get(url)
 
 # Log into LinkedIn
@@ -53,17 +53,16 @@ driver.find_element(By.XPATH, '//*[@type="submit"]').click()
 time.sleep(10)  # Wait for login to complete
 
 # Navigate to job search
-driver.get("https://www.linkedin.com/jobs/")
+driver.get(f"{url}/jobs/")
 time.sleep(5)  # Wait for the page to load
 
 # Locate the job search box and enter your role
-job_search_box = driver.find_element(By.XPATH, '/html/body/div[5]/header/div/div/div/div[2]/div[2]/div/div/input[1]')
-job_search_box.send_keys("Your Role")
+Role = 'Your Role'
 
 # Locate the location search box and enter your location
-location_search_box = driver.find_element(By.XPATH, '/html/body/div[5]/header/div/div/div/div[2]/div[3]/div/div/input[1]')
-location_search_box.send_keys("Your Location")
-job_search_box.send_keys(Keys.ENTER)
+location = 'Yor Location'
+
+driver.get(f"{url}/jobs/search/?keywords={Role}&location={location}")
 
 time.sleep(5)  # Wait for search results to load
 
@@ -161,7 +160,7 @@ while total_jobs_processed < max_jobs_to_process:
 
     # Update the URL with the next start value and navigate to the next page
     start += 25
-    next_page_url = f"https://www.linkedin.com/jobs/search/?keywords=programming&location=Brasil&start={start}"
+    next_page_url = f"{url}/jobs/search/?keywords={Role}&location={location}&start={start}"
     driver.get(next_page_url)
     time.sleep(5)  # Wait for the next page to load
 
